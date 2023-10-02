@@ -1,6 +1,6 @@
 pipeline {
     agent{
-        label 'bhavana'
+        label 'JDK-17'
     }
     triggers{
         pollSCM('* * * * *')
