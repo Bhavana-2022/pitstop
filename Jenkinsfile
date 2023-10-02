@@ -45,7 +45,7 @@ pipeline {
 
         stage(sonar) {
             steps{
-                dotnet sonarscanner begin /o:pitstop / k:pitstop_mypitstop /d:sonar.host.url=https://sonarcloud.io/ dotnet build src/pitstop.sln dotnet sonarscanner end
+                dotnet sonarscanner begin /o:pitstop / k:pitstop_mypitstop /d:sonar.host.url=https://sonarcloud.io/ <dotnet build src/pitstop.sln> dotnet sonarscanner end
             }
         }    
     }    
