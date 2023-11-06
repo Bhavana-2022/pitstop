@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: invoiceservice
+  namespace: pitstop
+  labels:
+    env: production  
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: invoiceservice
+  template:
+    metadata:
+      name: invoiceservice
+      labels:
+        name: invoiceservice 
+    spec:
+      containers:
+        - name: invoiceservice 
+          image: pitstop/invoiceservice:1.0
+          env:
+            - name: DOTNET_ENVIRONMENT 
+              value: Production 

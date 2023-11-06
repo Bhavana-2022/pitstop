@@ -1,0 +1,25 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notificationservice
+  namespace: pitstop
+  labels:
+    env: production  
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: notificationservice
+  template:
+    metadata:
+      name: notificationservice
+      labels:
+        name: notificationservice 
+    spec:
+      containers:
+        - name: notificationservice 
+          image: pitstop/notificationservice:1.0
+          env:
+            - name: DOTNET_ENVIRONMENT 
+              value: Production 

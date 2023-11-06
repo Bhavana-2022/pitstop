@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: customermanagementapi
+  namespace: pitstop
+  labels:
+    env: production  
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: customermanagementapi
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      name: customermanagementapipod
+      labels:
+        name: customermanagementapi 
+    spec:
+      containers:
+        - name: customermanagementapi 
+          image: pitstop/customermanagementapi:1.0
+          ports:
+            - containerPort: 5100
+          env:
+            - name: ASPNETCORE_ENVIRONMENT 
+              value: Production 
+
+
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: customermanagementapi
+  namespace: pitstop  
+spec:
+  selector:
+    name: customermanagementapi 
+  type: ClusterIP
+  ports:
+    - name: "http-5100"
+      targetPort: 5100
+      port: 5100 

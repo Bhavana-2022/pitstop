@@ -1,0 +1,27 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: workshopmanagementeventhandler
+  namespace: pitstop
+  labels:
+    env: production  
+spec:
+  minReadySeconds: 3
+  replicas: 1
+  selector:
+    matchLabels:
+      name: workshopmanagementeventhandler
+  template:
+    metadata:
+      name: workshopmanagementeventhandlerpod
+      labels:
+        name: workshopmanagementeventhandler 
+    spec:
+      containers:
+        - name: workshopmanagementeventhandler 
+          image: pitstop/workshopmanagementeventhandler:1.0
+          env:
+            - name: DOTNET_ENVIRONMENT 
+              value: Production 
+      restartPolicy: Always      

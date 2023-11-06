@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auditlogservice
+  namespace: pitstop
+  labels:
+    env: production  
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: auditlogservice
+  template:
+    metadata:
+      name: auditlogservice
+      labels:
+        name: auditlogservice 
+    spec:
+      containers:
+        - name: auditlogservice 
+          image: pitstop/auditlogservice:1.0
+          env:
+            - name: DOTNET_ENVIRONMENT 
+              value: Production 
